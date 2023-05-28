@@ -1,27 +1,29 @@
-package org.adt.core.adt.implementation.dynamic;
+package org.adt.core.adt.exercises;
 
-import org.adt.core.adt.definition.IMultipleDictionary;
 import org.adt.core.adt.definition.ISet;
 import org.adt.core.adt.definition.IStack;
+import org.adt.core.adt.implementation.dynamic.Stack;
 import org.adt.core.adt.implementation.dynamic.node.MultipleDictionaryNode;
-import org.adt.core.adt.implementation.normal.Set;
+import org.adt.core.adt.implementation.dynamic.node.StackMultiDicNode;
+import org.adt.core.adt.implementation.dynamic.Set;
 
-public class MultipleDictionary implements IMultipleDictionary {
+public class StackDicMulti {
+    private StackMultiDicNode first;
 
-    private MultipleDictionaryNode first;
 
-    @Override
     public void add(int key, int value) {
-        ISet set = new Set();
-        set.add(value);
+        Stack stack = new Stack();
+        stack.add(value);
         if (this.first == null) {
-            this.first = new MultipleDictionaryNode(key, set, null);
+            this.first = new StackMultiDicNode(key, stack, null);
             return;
         }
-        MultipleDictionaryNode candidate = this.first;
+        StackMultiDicNode candidate = this.first;
         while (candidate.getNext() != null) {
             if (candidate.getKey() == key) {
-                candidate.getValue().add(value);
+                if (existeElemento(value, candidate.getValue())){
+                    candidate.getValue().add(value);
+                }
                 return;
             }
             candidate = candidate.getNext();
@@ -30,16 +32,16 @@ public class MultipleDictionary implements IMultipleDictionary {
             candidate.getValue().add(value);
             return;
         }
-        candidate.setNext(new MultipleDictionaryNode(key, set, null));
+        candidate.setNext(new StackMultiDicNode(key, stack, null));
     }
 
-    @Override
+
     public void remove(int key, int value) {
-        MultipleDictionaryNode backup = null;
-        MultipleDictionaryNode candidate = this.first;
+        StackMultiDicNode backup = null;
+        StackMultiDicNode candidate = this.first;
         while (candidate != null) {
             if (candidate.getKey() == key) {
-                candidate.getValue().remove(value);
+                remover(candidate.getValue(),value);
                 if (candidate.getValue().isEmpty()) {
                     if (backup == null) {
                         if (candidate.getNext() == null) {
@@ -61,11 +63,39 @@ public class MultipleDictionary implements IMultipleDictionary {
             candidate = candidate.getNext();
         }
     }
+    public void remover(Stack stack, int value){
+        Stack aux = new Stack();
 
-    @Override
+        while (!stack.isEmpty()){
+            if(stack.getTop()!=value){
+                aux.add(stack.getTop());
+            }
+            stack.remove();
+            while(!aux.isEmpty())
+                stack.add(aux.getTop());
+                aux.remove();
+        }
+    }
+    public boolean existeElemento(int key, Stack value){
+        Stack aux = new Stack();
+        boolean existe = false;
+        while(!value.isEmpty())
+            if(key!=value.getTop()){
+                aux.add(value.getTop());
+                value.remove();
+            }else{
+                existe = true;
+                value.remove();
+            }
+        while(!aux.isEmpty()){
+            value.add(aux.getTop());
+            aux.remove();
+        }return existe;
+    }
+
     public ISet getKeys() { // N^2
         ISet keySet = new Set(); // C
-        MultipleDictionaryNode candidate = this.first; // C
+        StackMultiDicNode candidate = this.first; // C
         while (candidate != null) { // N * (N * C) = N^2 C = N^2
             keySet.add(candidate.getKey()); // N*C
             candidate = candidate.getNext();
@@ -73,9 +103,9 @@ public class MultipleDictionary implements IMultipleDictionary {
         return keySet; // C
     }
 
-    @Override
-    public ISet getValues(int key) {
-        MultipleDictionaryNode candidate = this.first;
+
+    public IStack getValues(int key) {
+        StackMultiDicNode candidate = this.first;
         while (candidate != null) {
             if (candidate.getKey() == key) {
                 return candidate.getValue();
