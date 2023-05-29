@@ -1,6 +1,5 @@
 package org.adt.core.adt.implementation.dynamic;
 
-import org.adt.core.adt.definition.IBinaryTree;
 import org.adt.core.adt.definition.INaryTree;
 import org.adt.core.adt.implementation.dynamic.node.NaryTreeNode;
 
@@ -8,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NaryTree implements INaryTree {
-    
+
     private NaryTreeNode root;
-    
+
     @Override
     public void create(int value) {
         this.root = new NaryTreeNode(value, new ArrayList<>());
@@ -29,46 +28,50 @@ public class NaryTree implements INaryTree {
     @Override
     public void add(int value, int index) {
         int size = this.root.getChildren().size();
-        
-        NaryTree naryTree = new NaryTree();
+
+        INaryTree naryTree = new NaryTree();
         naryTree.create(value);
-        if(size == index) {
+        if (size == index) {
             this.root.getChildren().add(naryTree);
             return;
         }
-        
-        List<NaryTree> aux = new ArrayList<>();
-        if(size > index) {
-            for(int i = 0; i < size; i++) {
+
+        List<INaryTree> aux = new ArrayList<>();
+        if (size > index) {
+            for (int i = 0; i < size; i++) {
                 aux.add((i == index) ? naryTree : this.root.getChildren().get(i));
             }
+            this.root.setChildren(aux);
             return;
         }
 
-        if(size < index) {
-            for(int i = size; i < index; i++) {
-                aux.add(null);
-            }
-            aux.add(naryTree);
+        for (int i = size; i < index; i++) {
+            aux.add(null);
         }
-        
+        aux.add(naryTree);
+        this.root.setChildren(aux);
     }
 
     @Override
     public void remove(int index) {
         int size = this.root.getChildren().size();
-        if(size <= index) {
+        if (size <= index) {
             return;
         }
         this.root.getChildren().set(index, null);
     }
 
     @Override
-    public NaryTree get(int index) {
+    public INaryTree get(int index) {
         int size = this.root.getChildren().size();
-        if(index > size) {
+        if (index > size) {
             throw new RuntimeException("Error");
         }
         return this.root.getChildren().get(index);
+    }
+
+    @Override
+    public List<INaryTree> getChildren() {
+        return this.root.getChildren();
     }
 }

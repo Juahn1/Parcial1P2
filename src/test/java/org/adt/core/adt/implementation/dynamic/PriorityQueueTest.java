@@ -1,5 +1,6 @@
 package org.adt.core.adt.implementation.dynamic;
 
+import org.adt.core.adt.definition.IPriorityQueue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ public class PriorityQueueTest {
         // test 1 element
         PriorityQueue priorityQueue = new PriorityQueue();
         assertTrue(priorityQueue.isEmpty());
-        priorityQueue.add(1,2);
+        priorityQueue.add(1, 2);
         assertFalse(priorityQueue.isEmpty());
 
         // test 2 elements
@@ -23,9 +24,9 @@ public class PriorityQueueTest {
         assertEquals(2, priorityQueue.getPriority());
 
         // test N elements
-        priorityQueue.add(-1,2);
-        priorityQueue.add(5,-2);
-        priorityQueue.add(0,0);
+        priorityQueue.add(-1, 2);
+        priorityQueue.add(5, -2);
+        priorityQueue.add(0, 0);
 
         assertEquals(5, priorityQueue.getFirst());
         assertEquals(-2, priorityQueue.getPriority());
@@ -41,6 +42,17 @@ public class PriorityQueueTest {
         priorityQueue.remove();
         assertEquals(-1, priorityQueue.getFirst());
         assertEquals(2, priorityQueue.getPriority()); // check same priority
+
+        // cheque queue with 2 elements
+        IPriorityQueue priorityQueue2 = new PriorityQueue();
+        priorityQueue2.add(1, 1);
+        priorityQueue2.add(3, 3);
+        priorityQueue2.add(2, 2);
+        assertEquals(1, priorityQueue2.getFirst());
+        priorityQueue2.remove();
+        assertEquals(2, priorityQueue2.getFirst());
+        priorityQueue2.remove();
+        assertEquals(3, priorityQueue2.getFirst());
     }
 
     @Test
@@ -52,7 +64,7 @@ public class PriorityQueueTest {
         assertDoesNotThrow(priorityQueue::remove);
 
         // test 1 element
-        priorityQueue.add(1,2);
+        priorityQueue.add(1, 2);
         priorityQueue.remove();
         assertTrue(priorityQueue.isEmpty());
 
@@ -64,8 +76,8 @@ public class PriorityQueueTest {
         assertEquals(2, priorityQueue.getPriority());
 
         // test N elements
-        priorityQueue.add(3,3);
-        priorityQueue.add(4,4);
+        priorityQueue.add(3, 3);
+        priorityQueue.add(4, 4);
         priorityQueue.remove();
 
         assertEquals(3, priorityQueue.getFirst());
