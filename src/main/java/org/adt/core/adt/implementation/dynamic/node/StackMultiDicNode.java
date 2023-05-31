@@ -9,7 +9,9 @@ import org.adt.core.adt.implementation.dynamic.Stack;
 public class StackMultiDicNode {
 
     private int key;
-    private IStack value;
+
+    private Stack value;
+
     private StackMultiDicNode next;
 
     public StackMultiDicNode(int key, Stack value, StackMultiDicNode next) {
@@ -30,7 +32,9 @@ public class StackMultiDicNode {
         return value;
     }
 
-    public void setValue(IStack value) {
+
+    public void setValue(Stack value) {
+
         this.value = value;
     }
 

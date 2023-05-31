@@ -115,7 +115,7 @@ public class StackDicMulti {
         return null; // Error
     }
 
-    @Override
+
     public boolean isEmpty() {
         return this.first == null;
     }
