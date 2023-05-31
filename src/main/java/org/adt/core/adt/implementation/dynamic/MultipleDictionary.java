@@ -2,6 +2,7 @@ package org.adt.core.adt.implementation.dynamic;
 
 import org.adt.core.adt.definition.IMultipleDictionary;
 import org.adt.core.adt.definition.ISet;
+import org.adt.core.adt.definition.IStack;
 import org.adt.core.adt.implementation.dynamic.node.MultipleDictionaryNode;
 import org.adt.core.adt.implementation.normal.Set;
 

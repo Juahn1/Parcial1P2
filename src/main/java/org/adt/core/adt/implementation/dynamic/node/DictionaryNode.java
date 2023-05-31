@@ -1,10 +1,12 @@
 package org.adt.core.adt.implementation.dynamic.node;
 
 
+
 public class DictionaryNode {
     private int key;
     private int value;
     private DictionaryNode next;
+
     public int getKey() {
         return key;
     }
@@ -30,12 +32,12 @@ public class DictionaryNode {
     }
 
 
+
     public DictionaryNode(int key, int value, DictionaryNode next) {
         this.key = key;
         this.value = value;
         this.next = next;
     }
-
 
 
 }

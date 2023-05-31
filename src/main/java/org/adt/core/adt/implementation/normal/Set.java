@@ -7,6 +7,7 @@ import java.util.Random;
 public class Set implements ISet {
 
     private final int[] array;
+
     private int count;
 
     public Set() {
