@@ -53,17 +53,17 @@ public class ejercicios17may {
             if(this.count == randomIndex && this.arreglo[randomIndex]){
                 return this.count;
             }
-            return;
+            return randomIndex;
         }
 
 
-        public boolean equals(BooleanSet a, BooleanSet b){
-            BooleanSet c = new BooleanSet();
-            while(!b.isEmpty()){
-                int element = b.choose();
+        //public boolean equals(BooleanSet a, BooleanSet b){
+            //BooleanSet c = new BooleanSet();
+            //while(!b.isEmpty()){
+                //int element = b.choose();
 
             }
         }
-    }
-    }
+
+
 

@@ -1,16 +1,41 @@
 package org.adt.core.adt.implementation.dynamic.node;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
 public class DictionaryNode {
-
     private int key;
     private int value;
     private DictionaryNode next;
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public DictionaryNode getNext() {
+        return next;
+    }
+
+    public void setNext(DictionaryNode next) {
+        this.next = next;
+    }
+
+
+    public DictionaryNode(int key, int value, DictionaryNode next) {
+        this.key = key;
+        this.value = value;
+        this.next = next;
+    }
+
+
 
 }
